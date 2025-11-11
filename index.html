@@ -1,0 +1,604 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雷卡制药有限公司</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --secondary: #2e86c1;
+            --accent: #7d3c98;
+            --light: #f8f9fa;
+            --dark: #1b2631;
+            --danger: #c0392b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-left: 10px;
+            font-weight: 700;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: #e8f6f3;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            background: linear-gradient(rgba(26, 82, 118, 0.8), rgba(46, 134, 193, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a5276"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%232e86c1" stroke-width="2"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #6c3483;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* 产品区域 */
+        .products {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 10px auto;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-card.featured {
+            border: 2px solid var(--accent);
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .featured .product-image {
+            height: 100%;
+        }
+        
+        .product-content {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .product-subtitle {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .product-description {
+            margin-bottom: 1rem;
+        }
+        
+        .warning {
+            color: var(--danger);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            border-left: 3px solid var(--danger);
+            padding-left: 10px;
+        }
+        
+        /* 关于区域 */
+        .about {
+            padding: 5rem 0;
+            background-color: #f0f3f5;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .about-image {
+            background-color: var(--secondary);
+            height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #34495e;
+            font-size: 0.9rem;
+            color: #95a5a6;
+        }
+        
+        /* 隐藏的彩蛋 */
+        .easter-egg {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+            z-index: 100;
+        }
+        
+        .easter-egg:hover {
+            opacity: 1;
+        }
+        
+        .hidden-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.9);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            z-index: 1000;
+            text-align: center;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            .product-card.featured {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🧪</div>
+                    <h1>雷卡制药有限公司</h1>
+                </div>
+                <nav>
+                    <ul>
+                         <li><a href=" ">首页</a ></li>
+                        <li><a href="#products">产品</a ></li>
+                        <li><a href="#about">关于我们</a ></li>
+                        <li><a href="#contact">联系我们</a ></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>提升组织效率，优化员工表现</h2>
+            <p>雷卡制药致力于人类潜能解放与效率革新，应对现代职场中的效率挑战。</p>
+            <p>我们的产品帮助组织最大化人力资源潜力。</p> 
+        </div>
+    </section>
+
+    <!-- 产品区域 -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">我们的产品</h2>
+            <div class="product-grid">
+                <!-- 主推产品 -->
+                <div class="product-card featured">
+                    <div class="product-image">
+                        <div>🧠</div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">异化剂(Alien-8)</h3>
+                        <p class="product-subtitle">安神增效剂®-8型</p>
+                        <p class="product-description">专为现代职场设计的精神状态优化剂。有效治疗和预防影响组织效率的不良精神状态，包括焦虑、注意力分散、决策犹豫和创造力不足等问题。</p>
+                        <p class="product-description">经过三期临床试验，Alien-8能显著提高员工专注度达47%，决策速度提升62%，团队协作效率提高38%。</p>
+                        <p class="warning">注意：部分使用者报告出现轻微记忆模糊和情感钝化现象，通常在适应期后消失。请严格遵循医嘱使用。</p>
+                        获取产品资料
+                    </div>
+                </div>
+                
+                <!-- 其他产品 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <div>💊</div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">聚焦素(Focus-Plus)</h3>
+                        <p class="product-description">针对注意力缺陷的短期解决方案，帮助员工在关键时刻保持高度专注。</p>
+                        <p class="warning">长期使用可能导致依赖性。</p>
+                        了解更多
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <div>🔬</div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">协作增强剂(Collab-Boost)</h3>
+                        <p class="product-description">优化团队沟通与协作能力，减少人际冲突，提高团队凝聚力。</p>
+                        <p class="warning">可能增强从众心理，降低独立思考能力。</p>
+                        了解更多
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <div>📈</div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">效率追踪系统(ETS)</h3>
+                        <p class="product-description">非药物解决方案，通过生物指标监测和工作模式分析，提供个性化效率优化建议。</p>
+                        <p class="warning">系统收集的数据可能用于绩效评估。</p>
+                        了解更多
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">关于雷卡制药</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>我们的使命</h3>
+                    <p>雷卡制药成立于2107年，至今已十余年历史。我们始终致力于通过生物化学和神经科学的前沿研究，解决现代生活中日益严重的精神健康与效率问题。</p>
+                    <p>我们相信，通过科学的手段优化员工精神状态，不仅能提高组织效率，更能为员工创造更满意的工作体验。</p>
+                    <h3>我们的价值观</h3>
+                    <p>效率、创新、责任。我们坚信技术进步应当服务于人类福祉，我们的产品开发始终遵循最高的安全与伦理标准。</p>
+                    <p>我们的研发团队由来自全球顶尖机构的神经科学家和药理学家组成，确保每一款产品都经过严格测试和验证。</p>
+                </div>
+                <div class="about-image">
+                    <div>创新驱动效率</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>联系我们</h3>
+                    <p>电话: 400-888-REKA</p>
+                    <p>邮箱: info@rekapharma.com</p>
+                    <p>地址: 云川省景安江市晨星高科技园区</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href=" ">首页</a ></li>
+                        <li><a href="#products">产品</a ></li>
+                        <li><a href="#about">关于我们</a ></li>
+                        <li><a href="#">投资者关系</a ></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>法律信息</h3>
+                    <ul>
+                        <li><a href="#">隐私政策</a ></li>
+                        <li><a href="#">使用条款</a ></li>
+                        <li><a href="#">产品安全信息</a ></li>
+                        <li><a href="#">合规声明</a ></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2125 雷卡制药有限公司 版权所有 | 沐ICP备12345678号</p >
+                <p style="font-size: 0.8rem; margin-top: 5px;">本网站及视频内容纯属虚构，如有雷同，纯属巧合</p >
+            </div>
+        </div>
+    </footer>
+
+    <!-- 彩蛋-->
+    <div class="easter-egg" onclick="showMessage()">?</div>
+    
+    <div class="hidden-message" id="hiddenMessage">
+        <span class="close-btn" onclick="closeMessage()">&times;</span>
+        <h3>你发现了我们的秘密</h3>
+        <p>Alien-8不仅仅优化工作效率...</p >
+        <p>它还能重塑员工的思维模式，使其更符合组织需求。</p >
+        <p>第7期临床试验显示，持续使用48小时后，97.3%的受试者表现出对工作指令的绝对服从性。</p >
+        <p>个体差异正在被消除，组织效率正在最大化。</p >
+        <p style="margin-top: 15px; font-size: 0.9rem; color: #ccc;">这条信息将在10秒后自动消失</p >
+    </div>
+
+    <script>
+        // 显示隐藏消息
+        function showMessage() {
+            const message = document.getElementById('hiddenMessage');
+            message.style.display = 'block';
+            setTimeout(closeMessage, 10000);
+        }
+        
+        // 关闭隐藏消息
+        function closeMessage() {
+            const message = document.getElementById('hiddenMessage');
+            message.style.display = 'none';
+        }
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 添加一些交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 随机改变警告文字颜色
+            setInterval(function() {
+                const warnings = document.querySelectorAll('.warning');
+                warnings.forEach(warning => {
+                    warning.style.color = `hsl(${Math.random() * 360}, 70%, 50%)`;
+                });
+            }, 3000);
+            
+            // 产品卡片悬停效果增强
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
